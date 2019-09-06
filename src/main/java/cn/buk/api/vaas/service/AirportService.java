@@ -1,6 +1,5 @@
 package cn.buk.api.vaas.service;
 
-import cn.buk.api.vaas.dto.ServiceProductDto;
 import cn.buk.api.vaas.dto.ServiceProductResponse;
 
 /**

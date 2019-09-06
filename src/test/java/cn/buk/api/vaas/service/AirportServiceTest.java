@@ -2,6 +2,7 @@ package cn.buk.api.vaas.service;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import cn.buk.api.vaas.dto.ServiceProductDto;
 import cn.buk.api.vaas.dto.ServiceProductResponse;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -24,5 +25,9 @@ class AirportServiceTest {
     assertNotNull(rs);
     assertEquals(0, rs.getErrorCode());
     assertEquals(5, rs.getDatas().size());
+
+    for(ServiceProductDto dto: rs.getDatas()) {
+      System.out.println(dto.getProductCode() + ": " + dto.getProductName() + ", " + dto.getProductType());
+    }
   }
 }
