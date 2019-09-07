@@ -153,24 +153,18 @@ public class HttpUtil extends BaseHttpClient {
 
         try {
             StringEntity entity = new StringEntity(content, "UTF-8");
+            entity.setContentType("application/json");
             httpPost.setEntity(entity);
 
-
-            //设置参数
-//            List<NameValuePair> nvps = new ArrayList<NameValuePair>();
-//                nvps.add(new BasicNameValuePair("data", content));
-//
-//            httpPost.setEntity(new UrlEncodedFormEntity(nvps, StandardCharsets.UTF_8));
 
 
             CloseableHttpResponse response = httpClient.execute(httpPost);
 
-//            System.out.println(response);
 
             if (response.getStatusLine().getStatusCode() == HttpStatus.SC_OK) {
                 rs = EntityUtils.toString(response.getEntity(), "UTF-8");
-
-//                System.out.println(rs);
+            } else {
+                System.out.println(response.toString());
             }
 
             response.close();

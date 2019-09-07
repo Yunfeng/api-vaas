@@ -13,56 +13,50 @@ public class ServiceProductDto {
   private int id;
 
   /**
-   * 10开头表示保险
+   * 商品代码
    */
-  @JsonInclude(Include.NON_NULL)
-  private String productCode; //商品代码：
+  private String productCode;
 
   /**
-   * 0 - 保险
+   * 商品类型： 保险，门票等
    */
-  private int productType; //商品类型： 保险，门票等
+  private int productType;
 
-  @JsonInclude(Include.NON_NULL)
-  private String productName; //商品名称：航意险，延误险等
+  /**
+   * 商品名称：航意险，延误险等
+   */
+  private String productName;
 
-  @JsonInclude(Include.NON_NULL)
-  private String productDesc; // 产品描述
+  /**
+   * 产品描述
+   */
+  private String productDesc;
 
-  private int price; //价格
+  /**
+   * 价格
+   */
+  private int price;
 
   /**
    * 适用机场
    */
-  @JsonInclude(Include.NON_NULL)
   private String applicableAirports;
 
   /**
    * 排除机场
    */
-  @JsonInclude(Include.NON_NULL)
   private String excludedAirports;
 
   /**
    * 适用航空公司
    */
-  @JsonInclude(Include.NON_NULL)
   private String applicableAirlines;
 
   /**
    * 排除航空公司
    */
-  @JsonInclude(Include.NON_NULL)
   private String excludedAirlines;
 
-
-  @JsonInclude(Include.NON_NULL)
-  @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone="GMT+8")
-  private Date createTime;
-
-  @JsonInclude(Include.NON_NULL)
-  @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone="GMT+8")
-  private Date lastUpdate;
 
   public int getId() {
     return id;
@@ -110,22 +104,6 @@ public class ServiceProductDto {
 
   public void setPrice(int price) {
     this.price = price;
-  }
-
-  public Date getCreateTime() {
-    return createTime;
-  }
-
-  public void setCreateTime(Date createTime) {
-    this.createTime = createTime;
-  }
-
-  public Date getLastUpdate() {
-    return lastUpdate;
-  }
-
-  public void setLastUpdate(Date lastUpdate) {
-    this.lastUpdate = lastUpdate;
   }
 
   public String getApplicableAirports() {
