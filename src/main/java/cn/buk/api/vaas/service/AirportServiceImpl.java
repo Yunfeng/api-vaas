@@ -23,7 +23,13 @@ public class AirportServiceImpl implements AirportService {
 
   private final String secretKey;
 
-  AirportServiceImpl(String apiBaseUrl, String username, String secretKey) {
+  private AirportServiceImpl() {
+    this.apiBaseUrl = null;
+    this.username = null;
+    this.secretKey = null;
+  }
+
+  public AirportServiceImpl(String apiBaseUrl, String username, String secretKey) {
     this.apiBaseUrl = apiBaseUrl;
     this.username = username;
     this.secretKey = secretKey;
