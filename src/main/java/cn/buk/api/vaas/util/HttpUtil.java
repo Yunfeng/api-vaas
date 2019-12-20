@@ -40,7 +40,6 @@ public class HttpUtil extends BaseHttpClient {
         String uri = url;
         if (params != null) uri += URLEncodedUtils.format(params, "UTF-8");
 
-        System.out.println(uri.toString());
         logger.debug(uri);
 
         CloseableHttpClient httpClient = createHttpClient();
@@ -91,7 +90,6 @@ public class HttpUtil extends BaseHttpClient {
             try {
                 while((ze = zin.getNextEntry()) != null) {//循环zip输入流，获取每一个文件实体
                     file = new File(path + ze.getName());//生成file（如果文件路径不存在，先创建）
-                    System.out.println(file.getAbsolutePath());
                     FileOutputStream fos = new FileOutputStream(file);
                     int len;
                     byte [] bytes = new byte[2048];
@@ -106,9 +104,6 @@ public class HttpUtil extends BaseHttpClient {
             } catch (Exception e) {
                 logger.error("异常 " + e);
             }
-//        } finally {
-//            if (response != null) response.close();
-//        }
     }
 
 //    public String unZipIt(String body) {
@@ -120,7 +115,6 @@ public class HttpUtil extends BaseHttpClient {
             ZipEntry entry = zis.getNextEntry();
             ByteArrayOutputStream baos = new ByteArrayOutputStream();
             while (entry != null) {
-                System.out.println("Extracting: " + entry);
                 int len;
                 while ((len = zis.read(buffer)) > 0) {
                     baos.write(buffer, 0, len);
@@ -130,7 +124,7 @@ public class HttpUtil extends BaseHttpClient {
                 baos.close();
             }
             zis.close();
-//            System.out.println(new String(baos.toByteArray()));
+
             if (baos.toByteArray().length > 0)
                 return new String(baos.toByteArray(), StandardCharsets.UTF_8);
             else
@@ -163,8 +157,6 @@ public class HttpUtil extends BaseHttpClient {
 
             if (response.getStatusLine().getStatusCode() == HttpStatus.SC_OK) {
                 rs = EntityUtils.toString(response.getEntity(), "UTF-8");
-            } else {
-                System.out.println(response.toString());
             }
 
             response.close();
