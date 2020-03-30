@@ -11,6 +11,7 @@ import cn.buk.api.vaas.dto.VasOrderFlightDto;
 import cn.buk.api.vaas.dto.VasOrderPassengerDto;
 import cn.buk.api.vaas.dto.VasOrderResponse;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 class AirportServiceTest {
@@ -43,6 +44,7 @@ class AirportServiceTest {
     System.out.println(jsonStr);
   }
 
+  @Disabled
   @Test
   void test_createServiceOrder() {
     VasOrderDto dto = new VasOrderDto();
@@ -51,11 +53,11 @@ class AirportServiceTest {
 
     VasOrderFlightDto flightDto = new VasOrderFlightDto();
     flightDto.getFlight().setFlightNo("MU9999");
-    flightDto.getFlight().setDepartureDate("2019-12-01");
+    flightDto.getFlight().setDepartureDate("2020-12-01");
     dto.getFlights().add(flightDto);
 
     VasOrderPassengerDto passengerDto = new VasOrderPassengerDto();
-    passengerDto.setName("麻子");
+    passengerDto.setName("测试");
 
     dto.getPassengers().add(passengerDto);
 
@@ -77,7 +79,7 @@ class AirportServiceTest {
 
     assertEquals("1234", response.getData().getExternalOrderNo());
     assertEquals("20190907DD00005", response.getData().getOrderNo());
-    assertEquals(0, response.getData().getStatus());
+    assertEquals(4, response.getData().getStatus());
   }
 
   @Test
