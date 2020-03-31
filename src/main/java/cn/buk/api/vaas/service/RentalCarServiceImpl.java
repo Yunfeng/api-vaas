@@ -25,6 +25,21 @@ public class RentalCarServiceImpl extends AbstractBaseService implements RentalC
   }
 
   @Override
+  public List<CityDto> searchRentalCities() {
+    final String apiUrl = apiBaseUrl + "/data/cities";
+
+    List<NameValuePair> params = new ArrayList<>();
+    params.add(new BasicNameValuePair("username", username));
+    params.add(new BasicNameValuePair("secretKey", secretKey));
+    String jsonStr = HttpUtil.postUrl(apiUrl, params);
+
+    System.out.println(apiUrl);
+    System.out.println(jsonStr);
+
+    return JSON.parseArray(jsonStr, CityDto.class);
+  }
+
+  @Override
   public CarOrderResponse searchRentalPrice(int useType, int cityId, String airportCode,
                                 String terminalNo, String flightNo, String departure, String arrival, Date useDateTime) {
     final String apiUrl = apiBaseUrl + "/car/price";

@@ -1,8 +1,10 @@
 package cn.buk.api.vaas.service;
 
 import cn.buk.api.vaas.dto.CarOrderResponse;
+import cn.buk.api.vaas.dto.CityDto;
 
 import java.util.Date;
+import java.util.List;
 
 /**
  * 租车服务接口
@@ -10,6 +12,11 @@ import java.util.Date;
  */
 public interface RentalCarService {
 
+  /**
+   * 查找提供租车服务的城市
+   * @return
+   */
+  List<CityDto> searchRentalCities();
 
 
   /**

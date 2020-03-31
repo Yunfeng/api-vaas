@@ -25,7 +25,6 @@ class RentalCarServiceTest {
 
   @Test
   void searchRentalPrice() {
-
     Date useDateTime = DateUtil.createDate(2020, 4, 10);
     useDateTime = DateUtil.setTimeOnDate(useDateTime, 10, 30, 0);
 
@@ -55,6 +54,11 @@ class RentalCarServiceTest {
     assertEquals(4, dto.getPrices().get(0).getVehicleTypeId());
     assertEquals("商务型", dto.getPrices().get(0).getVehicleTypeName());
     assertEquals(334, dto.getPrices().get(0).getPrice());
+  }
+
+  @Test
+  void searchCities() {
+    service.searchRentalCities();
   }
 
 }
