@@ -16,7 +16,16 @@ public class VehiclePriceDto {
    */
   private String vehicleTypeName;
 
+  /**
+   * 价格
+   */
   private double price;
+
+  /**
+   * 优惠金额
+   * 实收金额 = price - discount
+   */
+  private double discount;
 
 
 
@@ -42,5 +51,13 @@ public class VehiclePriceDto {
 
   public void setPrice(double price) {
     this.price = price;
+  }
+
+  public double getDiscount() {
+    return discount;
+  }
+
+  public void setDiscount(double discount) {
+    this.discount = discount;
   }
 }
