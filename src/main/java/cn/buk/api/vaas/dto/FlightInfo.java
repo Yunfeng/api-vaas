@@ -1,6 +1,5 @@
 package cn.buk.api.vaas.dto;
 
-import org.apache.log4j.Logger;
 
 /**
  * 航班信息
@@ -9,7 +8,6 @@ import org.apache.log4j.Logger;
  */
 public class FlightInfo implements Cloneable {
 
-	private static Logger logger = Logger.getLogger(FlightInfo.class);
 
 	/**
 	 * departure airport

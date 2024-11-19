@@ -14,36 +14,36 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
-import org.apache.http.Header;
-import org.apache.http.HttpEntity;
-import org.apache.http.HttpStatus;
-import org.apache.http.NameValuePair;
-import org.apache.http.client.config.RequestConfig;
-import org.apache.http.client.entity.UrlEncodedFormEntity;
-import org.apache.http.client.methods.CloseableHttpResponse;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.client.methods.HttpPost;
-import org.apache.http.client.utils.URLEncodedUtils;
-import org.apache.http.entity.StringEntity;
-import org.apache.http.impl.client.CloseableHttpClient;
-import org.apache.http.util.EntityUtils;
-import org.apache.log4j.Logger;
+import org.apache.hc.client5.http.classic.methods.HttpGet;
+import org.apache.hc.client5.http.classic.methods.HttpPost;
+import org.apache.hc.client5.http.config.RequestConfig;
+import org.apache.hc.client5.http.entity.UrlEncodedFormEntity;
+import org.apache.hc.client5.http.impl.classic.CloseableHttpClient;
+import org.apache.hc.client5.http.impl.classic.CloseableHttpResponse;
+import org.apache.hc.core5.http.Header;
+import org.apache.hc.core5.http.HttpEntity;
+import org.apache.hc.core5.http.HttpStatus;
+import org.apache.hc.core5.http.NameValuePair;
+import org.apache.hc.core5.http.io.entity.EntityUtils;
+import org.apache.hc.core5.http.io.entity.StringEntity;
+import org.apache.hc.core5.net.URIBuilder;
+import org.apache.hc.core5.net.URLEncodedUtils;
+import org.apache.hc.core5.util.Timeout;
 
 /**
  * @author yfdai
  */
 public class HttpUtil extends BaseHttpClient {
 
-    private static Logger logger = Logger.getLogger(HttpUtil.class);
 
     public static String getUrl(String url, List<NameValuePair> params) {
         String uri = url;
-        if (params != null) uri += URLEncodedUtils.format(params, "UTF-8");
+        if (params != null) uri += URLEncodedUtils.format(params, StandardCharsets.UTF_8);
 
-        logger.debug(uri);
+//        logger.debug(uri);
 
         CloseableHttpClient httpClient = createHttpClient();
-        RequestConfig requestConfig = RequestConfig.custom().setSocketTimeout(SO_TIMEOUT).setConnectTimeout(CONNECTION_TIMEOUT).build();
+        RequestConfig requestConfig = RequestConfig.custom().build();
 
         HttpGet httpGet = new HttpGet(uri);
         httpGet.setConfig(requestConfig);
@@ -68,7 +68,7 @@ public class HttpUtil extends BaseHttpClient {
 
             response.close();
         } catch (Exception ex) {
-            logger.error(ex.getMessage());
+//            logger.error(ex.getMessage());
         }
 
         return rs;
@@ -102,7 +102,7 @@ public class HttpUtil extends BaseHttpClient {
                 }
                 zin.close();//关闭输入流
             } catch (Exception e) {
-                logger.error("异常 " + e);
+//                logger.error("异常 " + e);
             }
     }
 
@@ -138,7 +138,7 @@ public class HttpUtil extends BaseHttpClient {
     public static String postUrl(final String url, final String content) {
         CloseableHttpClient httpClient = createHttpClient();
 
-        RequestConfig requestConfig = RequestConfig.custom().setSocketTimeout(SO_TIMEOUT).setConnectTimeout(CONNECTION_TIMEOUT).build();
+        RequestConfig requestConfig = RequestConfig.custom().build();
 
         HttpPost httpPost = new HttpPost(url);
         httpPost.setConfig(requestConfig);
@@ -146,8 +146,8 @@ public class HttpUtil extends BaseHttpClient {
         String rs = "";
 
         try {
-            StringEntity entity = new StringEntity(content, "UTF-8");
-            entity.setContentType("application/json");
+            StringEntity entity = new StringEntity(content, StandardCharsets.UTF_8);
+//            entity.setContentType("application/json");
             httpPost.setEntity(entity);
 
 
@@ -155,7 +155,7 @@ public class HttpUtil extends BaseHttpClient {
             CloseableHttpResponse response = httpClient.execute(httpPost);
 
 
-            if (response.getStatusLine().getStatusCode() == HttpStatus.SC_OK) {
+            if (response.getCode() == HttpStatus.SC_OK) {
                 rs = EntityUtils.toString(response.getEntity(), "UTF-8");
             }
 
@@ -170,7 +170,7 @@ public class HttpUtil extends BaseHttpClient {
     public static String postUrl(final String url, List<NameValuePair> nvps) {
         CloseableHttpClient httpClient = createHttpClient();
 
-        RequestConfig requestConfig = RequestConfig.custom().setSocketTimeout(SO_TIMEOUT).setConnectTimeout(CONNECTION_TIMEOUT).build();
+        RequestConfig requestConfig = RequestConfig.custom().build();
 
         HttpPost httpPost = new HttpPost(url);
         httpPost.setConfig(requestConfig);
@@ -184,7 +184,7 @@ public class HttpUtil extends BaseHttpClient {
             CloseableHttpResponse response = httpClient.execute(httpPost);
 
 
-            if (response.getStatusLine().getStatusCode() == HttpStatus.SC_OK) {
+            if (response.getCode() == HttpStatus.SC_OK) {
                 rs = EntityUtils.toString(response.getEntity(), "UTF-8");
             } else {
                 rs = EntityUtils.toString(response.getEntity(), "UTF-8");
